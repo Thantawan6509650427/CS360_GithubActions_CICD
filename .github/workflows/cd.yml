@@ -19,9 +19,9 @@ jobs:
       - name: Check if Docker Image Exists
         id: check_image
         run: |
-          REPOSITORY="${{ secrets.DOCKER_USERNAME }}/cs360_calc_image"  # Replace with your DockerHub repository name
+          REPOSITORY="${{ secrets.DOCKERHUB_USERNAME }}/cs360_calc_image"  # Replace with your DockerHub repository name
           TAG="latest"
-          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -u "${{ secrets.DOCKER_USERNAME }}:${{ secrets.DOCKER_TOKEN }}" https://hub.docker.com/v2/repositories/${REPOSITORY}/tags/${TAG}/)
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -u "${{ secrets.DOCKERHUB_USERNAME }}:${{ secrets.DOCKERHUB_TOKEN }}" https://hub.docker.com/v2/repositories/${REPOSITORY}/tags/${TAG}/)
           if [ "$RESPONSE" -ne 200 ]; then
               echo "Docker image not found. Exiting workflow."
               exit 1
